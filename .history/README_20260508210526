@@ -1,0 +1,49 @@
+🎬 Sistema de Gerenciamento de Cinema
+Este repositório contém o script SQL para a criação e estruturação de um banco de dados voltado ao controle de operações cinematográficas. O banco de dados, denominado cinema, organiza informações essenciais para o funcionamento de vendas e exibição de filmes.
+
+
+🗂️ Estrutura do Banco de Dados
+O banco de dados é composto por 5 tabelas principais:
+
+1. Clientes (clientes)
+    Armazena os dados básicos de identificação dos frequentadores.
+    Campos: ID (Automático), Nome do Cliente e RG (Único).
+    Destaque: Possui um valor padrão "Usuário inativo" para nomes não preenchidos.
+
+2. Ingresso (ingresso)
+    Gerencia os valores cobrados pelas entradas.
+    Campos: ID (Automático) e Valor do ingresso.
+    Observação: O campo de valor possui uma restrição de verificação (Check constraint).
+
+3. Filme (filme)
+    Registra o catálogo de filmes disponíveis.
+    Campos: ID (Automático), Categoria (Gênero), Duração e Nome.
+
+4. Sessão (sessao)
+    Define os horários e nomes das sessões de exibição.
+    Campos: ID (Automático), Horário e Nome da Sessão.
+
+5. Sala (sala)
+    Detalha o espaço físico onde ocorrem as exibições.
+    Campos: ID (Automático), Categoria (Ex: VIP, 3D, IMAX), Número da Sala e Descrição.
+
+
+🛠️ Como Executar
+Para subir este banco de dados em seu ambiente local (MySQL ou MariaDB), siga os passos abaixo:
+
+    Certifique-se de ter um servidor SQL ativo.
+    Abra o seu terminal ou ferramenta de gerenciamento (MySQL Workbench, DBeaver, etc.).
+    Execute o comando:
+    SQL
+    SOURCE caminho/para/o/arquivo/cinema_sql.sql;
+    Ou simplesmente copie e cole o conteúdo do arquivo no seu console SQL.
+
+
+⚠️ Observações Técnicas (Dicas de Melhoria)
+Ao analisar o código original, notam-se alguns pontos que podem ser ajustados para melhor funcionamento:
+
+    Restrições de Check: Nas tabelas ingresso, filme e sessao, a cláusula CHECK faz referência a uma coluna chamada salario_usuario, que não existe nessas tabelas. O ideal seria alterar para o nome correto do campo (ex: CHECK(valores_ingresso >= 0)).
+
+    Relacionamentos: No momento, as tabelas estão isoladas. Para um sistema funcional, recomenda-se adicionar Chaves Estrangeiras (Foreign Keys) para ligar, por exemplo, um ingresso a uma sessao e a um cliente.
+
+    Tipos de Dados: O campo horarios_sessao está como decimal. Para maior precisão de tempo, o tipo TIME ou DATETIME costuma ser mais indicado.
